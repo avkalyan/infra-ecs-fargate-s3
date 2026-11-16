@@ -10,12 +10,12 @@ output "cluster_arn" {
 
 output "vpc_id" {
   description = "VPC ID"
-  value       = aws_vpc.main.id
+  value       = var.vpc_id
 }
 
 output "public_subnet_ids" {
   description = "Public subnet IDs for deploying tasks"
-  value       = aws_subnet.public[*].id
+  value       = var.subnet_ids
 }
 
 output "security_group_id" {
