@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 # VPC
-resource "aws_vpc" "main" {
+/*resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
   enable_dns_support   = true
@@ -25,10 +25,10 @@ resource "aws_vpc" "main" {
       Name = "${var.cluster_name}-vpc"
     }
   )
-}
+}*/
 
 # Internet Gateway
-resource "aws_internet_gateway" "main" {
+/*resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = merge(
@@ -37,7 +37,7 @@ resource "aws_internet_gateway" "main" {
       Name = "${var.cluster_name}-igw"
     }
   )
-}
+}*/
 
 # Public Subnets
 data "aws_availability_zones" "available" {
