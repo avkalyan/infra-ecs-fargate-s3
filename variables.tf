@@ -10,6 +10,24 @@ variable "cluster_name" {
   default     = "kv-ecs-fargate-demo"
 }
 
+variable "vpc_id" {
+  description = "VPC ID"
+  type        = string
+  default     = "vpc-0bb2874364a88e59c"
+}
+
+variable "subnet_ids" {
+  description = "Subnet IDs"
+  type        = list(string)
+  default     = ["subnet-0a29a48072b5aa7b1", "subnet-0f6c4a79f5eaacf24"]
+}
+
+variable "security_group_id" {
+  description = "Security Group ID for ECS tasks"
+  type        = string
+  default     = "sg-0df0234a9267c8981"
+}
+
 variable "vpc_cidr" {
   description = "CIDR block for VPC"
   type        = string
