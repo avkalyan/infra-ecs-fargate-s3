@@ -18,7 +18,7 @@ output "public_subnet_ids" {
   value       = var.subnet_ids
 }
 
-output "security_group_id" {
+output "ecs_tasks_security_group_id" {
   description = "Security group ID for ECS tasks"
   value       = aws_security_group.ecs_tasks.id
 }
@@ -60,7 +60,7 @@ output "deploy_nginx_command" {
       --cluster ${aws_ecs_cluster.main.name} \
       --launch-type FARGATE \
       --task-definition ${aws_ecs_task_definition.nginx.family} \
-      --network-configuration "awsvpcConfiguration={subnets=[${join(",", aws_subnet.public[*].id)}],securityGroups=[${aws_security_group.ecs_tasks.id}],assignPublicIp=ENABLED}" \
+      --network-configuration "awsvpcConfiguration={subnets=[${join(",", var.subnet_ids)}],securityGroups=[${aws_security_group.ecs_tasks.id}],assignPublicIp=ENABLED}" \
       --region ${var.aws_region}
   EOT
 }
