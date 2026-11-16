@@ -44,7 +44,7 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
-resource "aws_subnet" "public" {
+/*resource "aws_subnet" "public" {
   count                   = length(var.public_subnets)
   vpc_id                  = aws_vpc.main.id
   cidr_block              = var.public_subnets[count.index]
@@ -57,10 +57,10 @@ resource "aws_subnet" "public" {
       Name = "${var.cluster_name}-public-subnet-${count.index + 1}"
     }
   )
-}
+}*/
 
 # Route Table
-resource "aws_route_table" "public" {
+/*resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
   route {
@@ -74,19 +74,19 @@ resource "aws_route_table" "public" {
       Name = "${var.cluster_name}-public-rt"
     }
   )
-}
+}*/
 
-resource "aws_route_table_association" "public" {
+/*resource "aws_route_table_association" "public" {
   count          = length(aws_subnet.public)
   subnet_id      = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public.id
-}
+}*/
 
 # Security Group for ECS Tasks
 resource "aws_security_group" "ecs_tasks" {
   name        = "${var.cluster_name}-ecs-tasks-sg"
   description = "Allow inbound traffic to ECS tasks"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.vpc_id //aws_vpc.main.id
 
   ingress {
     description = "HTTP from anywhere"
